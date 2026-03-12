@@ -3,7 +3,8 @@
 import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
 import {OrbitControls} from "https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js";
 import {GLTFLoader} from "https://unpkg.com/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
-
+import {OBJLoader} from "https://unpkg.com/three@0.160.0/examples/jsm/loaders/OBJLoader.js";
+  
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x202020);
 
@@ -34,19 +35,16 @@ scene.add(new THREE.AmbientLight(0xffffff,0.4));
 
 let humanModel;
 
-const loader = new GLTFLoader();
+const loader = new OBJLoader();
 
-loader.load("models/human.glb", function(gltf){
+loader.load("models/free_pack_human_skeleton.obj", function(object){
 
-humanModel = gltf.scene;
+object.scale.set(0.01,0.01,0.01);
+object.position.set(0,0,0);
 
-humanModel.position.set(0,0,0);
-humanModel.scale.set(1,1,1);
-
-scene.add(humanModel);
+scene.add(object);
 
 });
-
 /* animation */
 
 function animate(){
